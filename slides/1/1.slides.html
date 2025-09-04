@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>1</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="предыстория" class="slide level3">
+<h3>Предыстория</h3>
+<p>Бизнес-кейс:</p>
+<p>Большая зеленая компания VS Маленькая синяя компания</p>
+</section>
+<section id="об-авторе" class="slide level3">
+<h3>Об авторе</h3>
+<ul>
+<li><p>Мелешко Александр Станиславович</p></li>
+<li><p>15 лет опыта техписателем, переводчиком, редактором</p></li>
+<li><p>Две опубликованных книги</p></li>
+<li><p>Открыл (и через год закрыл) своё агентство по переводу
+игр</p></li>
+<li><p>Руковожу небольшим отделом техписателей в большой
+компании</p></li>
+<li><p>Любимая игра: Crusader Kings 3</p></li>
+</ul>
+</section>
+<section id="о-старом-курсе" class="slide level3">
+<h3>О старом курсе</h3>
+<ul>
+<li><p>Самый душный курс каждый семестр, когда преподавался</p></li>
+<li><p>Особенности контента</p></li>
+<li><p>Особенности постановки задач</p></li>
+</ul>
+</section>
+<section id="я-буду-учить" class="slide level3">
+<h3>Я буду учить:</h3>
+<ul>
+<li><p>Писать как можно меньше документации</p></li>
+<li><p>Отбиваться от хотелок заказчика</p></li>
+<li><p>Как можно меньше контактировать с конечным пользователем</p></li>
+<li><p>Никогда больше не ходить на бесполезные созвоны в 9 утра</p></li>
+<li><p>Четко пояснять, почему “нет, быстрее не получится”</p></li>
+</ul>
+</section>
+<section id="план-курса" class="slide level3">
+<h3>План курса</h3>
+<p><img data-src="./img/course_outline/course_outline.png" /></p>
+</section>
+<section id="возможный-результат" class="slide level3">
+<h3>Возможный результат</h3>
+<p><img data-src="./img/sphinx.png" /></p>
+</section>
+<section id="что-такое-техническая-документация-и-зачем-она-нужна"
+class="slide level3">
+<h3>Что такое техническая документация и зачем она нужна</h3>
+<p><strong>???</strong></p>
+</section>
+<section id="что-такое-техническая-документация-и-зачем-она-нужна-1"
+class="slide level3">
+<h3>Что такое техническая документация и зачем она нужна</h3>
+<ul>
+<li><p><em>Описание аспектов разработки, устройства и использования
+продукта</em></p></li>
+<li><p><em>Канал коммуникации между участниками процесса разработки и
+использования продукта</em></p></li>
+</ul>
+</section>
+<section id="хорошо-зачем-мне-она-нужна" class="slide level3">
+<h3>Хорошо, зачем <em>мне</em> она нужна?</h3>
+<ul>
+<li><p>Привлечение пользователя</p></li>
+<li><p>Совместная работа</p></li>
+<li><p>Реклама продукта</p></li>
+<li><p>Отбиться и сослаться</p></li>
+</ul>
+</section>
+<section id="но-ведь-есть-chatgpt" class="slide level3">
+<h3>Но ведь есть ChatGPT!</h3>
+<p>Плюсы: <strong>???</strong></p>
+<p>Минусы: <strong>???</strong></p>
+</section>
+<section id="но-ведь-есть-chatgpt-1" class="slide level3">
+<h3>Но ведь есть ChatGPT!</h3>
+<ul>
+<li>Плюсы</li>
+<li><ul>
+<li>Автоматизация документирования (API, шаблоны, Docs-as-Code)</li>
+</ul></li>
+<li><ul>
+<li>Вычитка и тестирование (Агенты)</li>
+</ul></li>
+<li><ul>
+<li>Стандартизация</li>
+</ul></li>
+<li>Минусы</li>
+<li><ul>
+<li>Не всегда законно</li>
+</ul></li>
+<li><ul>
+<li>Машинные косяки очевидны</li>
+</ul></li>
+<li><ul>
+<li>Ломается на больших объемах</li>
+</ul></li>
+<li><ul>
+<li>Средняя температура по больнице</li>
+</ul></li>
+</ul>
+</section>
+<section id="правила-использования-ии" class="slide level3">
+<h3>Правила использования ИИ</h3>
+<ol type="1">
+<li>Понимайте задачу</li>
+<li>Указывайте модель (DeepSeek, ChatGPT, Command-R, etc.)</li>
+<li>Имейте в виду ограничения</li>
+<li>Попробуйте сначала руками, у нас всего ~12 пар</li>
+</ol>
+</section>
+<section id="роль-документации-в-ит-проектах" class="slide level3">
+<h3>Роль документации в ИТ-проектах</h3>
+<ul>
+<li>Договориться</li>
+<li>Спланировать</li>
+<li>Сослаться</li>
+<li>Прикрыться</li>
+</ul>
+</section>
+<section id="участники-процесса-документирования" class="slide level3">
+<h3>Участники процесса документирования</h3>
+<ul>
+<li>Продажники</li>
+<li>Заказчики</li>
+<li>Начальники</li>
+<li>Вы</li>
+</ul>
+</section>
+<section id="три-кита-технической-документации" class="slide level3">
+<h3>Три кита технической документации</h3>
+<ul>
+<li><p>Кому? (Аудитория)</p></li>
+<li><p>Зачем? (Задача)</p></li>
+<li><p>Как? (Контекст)</p></li>
+</ul>
+</section>
+<section id="условности-с-платформой" class="slide level3">
+<h3>Условности с платформой</h3>
+<ul>
+<li><p>Старые материалы остаются</p></li>
+<li><p><strong>Старые задачи остаются</strong></p></li>
+<li><p>Новые материалы (эта презентация) и новые задания добавляются
+ссылкой в конец урока на платформе</p></li>
+<li><p>Старые задания выполнять можно, но оцениваться они не
+будут</p></li>
+</ul>
+</section>
+<section id="задание-знакомство-с-git-3-балла" class="slide level3">
+<h3>Задание: «Знакомство с Git» [3 балла]</h3>
+<p>Завести аккаунт, создать репозиторий и загрузить пустой файл.
+Записать каждый шаг. Открыть репозиторий для внешнего доступа.</p>
+<p><strong>Структура</strong>:</p>
+<pre><code>github.com/имя_пользователя/имя_репозитория/имя_файла.txt</code></pre>
+<p><strong>В txt:</strong></p>
+<pre><code>Имя Фамилия
+Группа
+почта@spb.ithub.ru</code></pre>
+<p><strong>Deliverables:</strong> Cсылка в виде
+<code>github.com/имя_пользователя/имя_репозитория/</code> в поле ответа
+на платформе.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: true,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
