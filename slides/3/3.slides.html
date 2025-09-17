@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>3</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="проектная-документация.-техническое-задание"
+class="slide level3">
+<h3>Проектная документация. Техническое задание</h3>
+</section>
+<section id="зачем-вообще-проектная-документация" class="slide level3">
+<h3>Зачем вообще проектная документация</h3>
+<ul>
+<li>Договориться (с заказчиком, командой, подрядчиком)<br />
+</li>
+<li>Прикрыться (юридически и морально)<br />
+</li>
+<li>Торговаться (когда начнутся наезды)</li>
+</ul>
+</section>
+<section id="документы-в-проекте" class="slide level3">
+<h3>Документы в проекте</h3>
+<ul>
+<li>Концепция / видение (нам бы вот это)</li>
+<li>Техническое задание (это будет выглядеть вот так)</li>
+<li>Проектная документация (схемы, диаграммы, графики)</li>
+<li>Пользовательская документация (вот что мы наворотили)</li>
+</ul>
+</section>
+<section id="что-такое-тз" class="slide level3">
+<h3>Что такое ТЗ</h3>
+<ul>
+<li>Документ, фиксирующий «что именно делаем»</li>
+<li>Минимум * для заказчика и исполнителя</li>
+<li>На основе ТЗ считаются сроки, деньги и ресурсы</li>
+</ul>
+</section>
+<section id="структура-тз" class="slide level3">
+<h3>Структура ТЗ</h3>
+<ol type="1">
+<li>Введение<br />
+</li>
+<li>Цели и задачи<br />
+</li>
+<li>Требования к функционалу<br />
+</li>
+<li>Требования к интерфейсу<br />
+</li>
+<li>Нефункциональные требования<br />
+</li>
+<li>Интеграции и окружение<br />
+</li>
+<li>Ограничения и допущения<br />
+</li>
+<li>Критерии приёмки<br />
+</li>
+<li>Приложения</li>
+</ol>
+</section>
+<section id="введение" class="slide level3">
+<h3>Введение</h3>
+<ul>
+<li>Что делаем и для кого</li>
+<li>На одну страницу <em>максимум</em></li>
+<li>Самыми общими словами</li>
+</ul>
+</section>
+<section id="цели-и-задачи" class="slide level3">
+<h3>Цели и задачи</h3>
+<ul>
+<li>«Зачем» проект существует (чего хочет бизнес)</li>
+<li>Цель = стратегический результат (привлечь больше клиентов)</li>
+<li>Задачи = конкретные, проверяемые (создать бота для приема
+заказов)</li>
+</ul>
+</section>
+<section id="функциональные-требования" class="slide level3">
+<h3>Функциональные требования</h3>
+<ul>
+<li>Что система должна делать (решать задачи)</li>
+<li>Декомпозиция: от общего к частному</li>
+</ul>
+</section>
+<section id="требования-к-интерфейсу" class="slide level3">
+<h3>Требования к интерфейсу</h3>
+<ul>
+<li>UI/UX = как это будет выгляеть<br />
+</li>
+<li>Не примеры дизайна, а только требования</li>
+</ul>
+</section>
+<section id="нефункциональные-требования" class="slide level3">
+<h3>Нефункциональные требования</h3>
+<ul>
+<li>Весь бекенд, который не влез в функционал</li>
+<li>Руководства и прочая документация</li>
+<li>Надежность, доступность, совместимость</li>
+<li>Здесь хорошо снимать розовые очки с заказчика</li>
+</ul>
+</section>
+<section id="интеграции-и-окружение" class="slide level3">
+<h3>Интеграции и окружение</h3>
+<ul>
+<li>К чему подключается<br />
+</li>
+<li>На чем развертывается</li>
+<li>С чего подключаются</li>
+</ul>
+</section>
+<section id="ограничения-и-допущения" class="slide level3">
+<h3>Ограничения и допущения</h3>
+<ul>
+<li>То, что очень хотели, но боялись спросить</li>
+<li>То, что очень (не) хотите реализовывать</li>
+<li>Тут можно свалить, например, поддержку на заказчика</li>
+</ul>
+</section>
+<section id="критерии-приёмки" class="slide level3">
+<h3>Критерии приёмки</h3>
+<ul>
+<li>Как понять, что проект завершён</li>
+<li>Пожалуй, самый важный пункт</li>
+<li>Ломает или спасает проект</li>
+</ul>
+</section>
+<section id="приложения" class="slide level3">
+<h3>Приложения</h3>
+<ul>
+<li>Схемы, макеты, примеры</li>
+<li>Дополнения и изменения</li>
+<li>Сроки и $$$</li>
+<li>Сюда можно ссылаться из основного текста, даже если пока тут
+пусто</li>
+</ul>
+</section>
+<section id="типичные-ошибки-в-тз" class="slide level3">
+<h3>Типичные ошибки в ТЗ</h3>
+<ul>
+<li>Сделать удобно – не требование<br />
+</li>
+<li>Быстро грузиться – не метрика<br />
+</li>
+<li>Чем меньше на себя берете – тем лучше</li>
+<li>Чем конкретнее задача – тем меньше пространства для раздувания</li>
+</ul>
+</section>
+<section id="практика.-тз-для-кофе-бота" class="slide level3">
+<h3>Практика. ТЗ для кофе-бота</h3>
+<p>Телеграм-бот для местной кофейни. Должен генерировать поток клиентов
+в не-пиковые часы.</p>
+<ul>
+<li>в боте есть меню</li>
+<li>можно выбрать несколько позиций</li>
+<li>производится оплата (далее цитата) “по qr коду”😕</li>
+<li>пользователю отдается сигнализация об успешной оплате</li>
+<li>предоставляется выбор формата получения заказа: “заберу сам”,
+“доставка до офиса”. В случае доставки пользователю необходимо подробно
+описать точку доставки заказа</li>
+</ul>
+</section>
+<section id="практика.-тз-для-кофе-бота-1" class="slide level3">
+<h3>Практика. ТЗ для кофе-бота</h3>
+<p>Бонус: что заказчик хочет докуртить в будущем</p>
+<ul>
+<li>нейронку для общения с пользователем в целях хи-хи-ха-ха и создания
+псевдо-уникального продукта</li>
+<li>NFT-стикеры в TG для фиксации за пользователем уникальных позиций в
+меню</li>
+</ul>
+</section>
+<section id="практика.-тз-для-кофе-бота-2" class="slide level3">
+<h3>Практика. ТЗ для кофе-бота</h3>
+<p>Задание:</p>
+<ol type="1">
+<li><p>Составить ТЗ, используя предложенную структуру <strong>или её
+части</strong>:</p>
+<ol type="1">
+<li>Введение<br />
+</li>
+<li>Цели и задачи<br />
+</li>
+<li>Требования к функционалу<br />
+</li>
+<li>Требования к интерфейсу<br />
+</li>
+<li>Нефункциональные требования<br />
+</li>
+<li>Интеграции и окружение<br />
+</li>
+<li>Ограничения и допущения<br />
+</li>
+<li>Критерии приёмки<br />
+</li>
+<li>Приложения</li>
+</ol></li>
+<li><p>Оформить ТЗ в .md и загрузить в свой github.</p></li>
+<li><p>(Опционально) До конца 22.09 прислать лиду по проекту, если есть
+желание участвовать.</p></li>
+</ol>
+</section>
+<section id="практика.-тз-для-кофе-бота-3" class="slide level3">
+<h3>Практика. ТЗ для кофе-бота</h3>
+<p>Критерии оценки:</p>
+<ul>
+<li>Содержание ТЗ (полнота, корректность) (0-8 баллов)</li>
+<li>Оформление (MD), грамматика, пунктуация (0-2 балла)</li>
+<li>Описание реализации нейронки и NFT (0-5 бонусных баллов)</li>
+<li>Вас взяли на проект за ваше ТЗ (10 бонусных баллов)</li>
+</ul>
+</section>
+<section id="материалы-с-лекции" class="slide level3">
+<h3>Материалы с лекции</h3>
+<p>https://github.com/meleshkoas/docfunsru/tree/main/slides/3</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: true,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
