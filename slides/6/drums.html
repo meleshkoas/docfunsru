@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <style>
+    :root{
+      --bg:#0f1115; --card:#141822; --accent:#7c5cff; --accent2:#2dd4bf; --text:#e7e9ee; --muted:#a3acc3;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:radial-gradient(1200px 600px at 10% -10%, #1c2130, transparent),
+               radial-gradient(1200px 600px at 110% 110%, #1a1f2d, transparent), var(--bg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text); display:flex; align-items:center; justify-content:center; padding:24px;
+    }
+
+    .app{width:min(100%, 980px)}
+
+    header{ text-align:center; margin-bottom:20px }
+    header h1{ margin:0 0 8px; font-weight:800; font-size:clamp(20px, 3.2vw, 32px)}
+    header p{ margin:0; color:var(--muted)}
+
+    .machine{
+      background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px; padding:18px; box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+
+    .reels{
+      display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px;
+    }
+
+    .reel{
+      background:var(--card); border:1px solid rgba(255,255,255,0.08); height:220px;
+      border-radius:16px; overflow:hidden; position:relative;
+    }
+
+    .reel::after{ /* shine */
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), transparent 40%, transparent 60%, rgba(255,255,255,0.06));
+    }
+
+    .reel-track{
+      position:absolute; left:0; right:0; will-change:transform;
+    }
+
+    .item{
+      display:flex; align-items:center; justify-content:center; text-align:center;
+      height:60px; padding:0 10px; font-weight:700; letter-spacing:.2px;
+      color:var(--text); text-shadow:0 1px 0 rgba(0,0,0,.4);
+    }
+
+    .item:nth-child(odd){ background:rgba(255,255,255,0.02) }
+
+    .center-mask{ /* highlights the stop row */
+      position:absolute; left:8px; right:8px; top:50%; translate:0 -50%; height:62px; border-radius:10px;
+      border:1px dashed rgba(124,92,255,0.55);
+      box-shadow: inset 0 0 0 1px rgba(124,92,255,0.25), 0 0 36px rgba(124,92,255,.18);
+      pointer-events:none;
+    }
+
+    .controls{ display:flex; gap:12px; align-items:center; justify-content:center; margin-top:16px }
+    button{
+      background:linear-gradient(180deg, var(--accent), #5a3bff); color:white; border:none; padding:14px 18px;
+      font-weight:800; border-radius:12px; cursor:pointer; letter-spacing:.3px; box-shadow: 0 10px 24px rgba(124,92,255,.35);
+    }
+    button:disabled{ opacity:.6; cursor:not-allowed }
+    .hint{ color:var(--muted); font-size:14px }
+
+    .result{
+      margin-top:18px; text-align:center; font-size: clamp(16px, 2.4vw, 22px);
+    }
+    .badge{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.1);
+      background:linear-gradient(180deg, rgba(45,212,191,.12), rgba(124,92,255,.10));
+    }
+    .pill{ padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05) }
+
+    footer{ text-align:center; margin-top:16px; color:var(--muted); font-size:13px }
+    kbd{ background:#11141b; border:1px solid rgba(255,255,255,.14); padding:2px 6px; border-radius:6px; font-weight:700 }
+  </style>
+</head>
+<body>
+  <div class="app">
+
+
+    <section class="machine" aria-label="Слот-машина тем">
+      <div class="reels" id="reels">
+        <div class="reel" data-type="genre">
+          <div class="center-mask"></div>
+          <div class="reel-track"></div>
+        </div>
+        <div class="reel" data-type="setting">
+          <div class="center-mask"></div>
+          <div class="reel-track"></div>
+        </div>
+        <div class="reel" data-type="feature">
+          <div class="center-mask"></div>
+          <div class="reel-track"></div>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="spinBtn">Запустить</button>
+      </div>
+      <div class="result" id="result" aria-live="polite"></div>
+    </section>
+
+  </div>
+
+  <script>
+    // Данные из вашей финальной таблицы (7×7×7)
+    const GENRES   = ["Гонки","Пазл","Симулятор","Платформер","RPG","Стратегия","Хоррор"]; // 7
+    const SETTINGS = ["Космос","Средневековье","Супергерои","Арктика / Север","Подводный мир","Постапокалипсис","Фэнтези"]; // 7
+    const FEATURES = ["Лидерборд","Локальный кооператив","Образовательный элемент","Создание предметов","Генерация случайных уровней","Система репутации","Геолокация / камера"]; // 7
+
+    const mapByType = {
+      genre: GENRES,
+      setting: SETTINGS,
+      feature: FEATURES,
+    };
+
+    const itemHeight = 60; // px — соответствует .item height
+    const reelLoopCount = 6; // сколько раз дублируем список для плавного цикла
+
+    const reels = [...document.querySelectorAll('.reel')].map(reel => {
+      const type = reel.dataset.type;
+      const track = reel.querySelector('.reel-track');
+      const values = mapByType[type];
+
+      // Наполняем трек дубликатами, чтобы анимация могла бесконечно крутиться
+      const fragment = document.createDocumentFragment();
+      for (let loop = 0; loop < reelLoopCount; loop++){
+        values.forEach(text => {
+          const div = document.createElement('div');
+          div.className = 'item';
+          div.textContent = text;
+          fragment.appendChild(div);
+        });
+      }
+      track.appendChild(fragment);
+
+      // Начальная позиция — так, чтобы в центре была первая строка
+      const startOffset = -(Math.floor((values.length * reelLoopCount)/2) * itemHeight) + itemHeight/2;
+      track.style.transform = `translateY(${startOffset}px)`;
+
+      return { type, track, values, startOffset, spinning:false, targetIndex:0 };
+    });
+
+    const spinBtn = document.getElementById('spinBtn');
+    const resultEl = document.getElementById('result');
+
+    let isSpinning = false;
+
+    function rnd(min, max){ return Math.random()*(max-min)+min }
+
+    function spin(){
+      if(isSpinning) return;
+      isSpinning = true; spinBtn.disabled = true; resultEl.textContent = '';
+
+      const now = performance.now();
+      const durations = [rnd(1700, 2400), rnd(2300, 3000), rnd(2900, 3600)]; // ступенчатая остановка барабанов
+      const speeds = [rnd(2.2, 2.8), rnd(2.0, 2.4), rnd(1.8, 2.2)]; // px/ms
+
+      reels.forEach((reel, i) => {
+        reel.spinning = true;
+        // Выбираем целевой индекс для остановки (центр барабана)
+        reel.targetIndex = Math.floor(Math.random() * reel.values.length);
+      });
+
+      function animate(t){
+        let anyActive = false;
+        reels.forEach((reel, i) => {
+          if(!reel.spinning) return;
+          anyActive = true;
+
+          const elapsed = t - now;
+          const duration = durations[i];
+          const speed = speeds[i];
+
+          if (elapsed < duration){
+            // Фаза вращения: двигаем трек вверх, петляем по высоте полного списка
+            const totalHeight = reel.values.length * reelLoopCount * itemHeight;
+            const offset = (reel.startOffset - ((elapsed * speed) % totalHeight));
+            reel.track.style.transform = `translateY(${offset}px)`;
+          } else {
+            // Фаза остановки: точно выравниваем на выбранный элемент в центре
+            const centerRow = Math.floor((reel.values.length * reelLoopCount)/2);
+            const baseIndex = centerRow - Math.floor(reel.values.length/2); // старт центра
+            const stopIndex = baseIndex + reel.targetIndex; // позиция нужного элемента
+            const offset = -(stopIndex * itemHeight) + itemHeight/2; // чтобы цель попала под mask
+            reel.track.style.transform = `translateY(${offset}px)`;
+            reel.spinning = false;
+          }
+        });
+        if(anyActive){ requestAnimationFrame(animate); } else { onStop(); }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    function onStop(){
+      isSpinning = false; spinBtn.disabled = false;
+      const picked = reels.map(r => r.values[r.targetIndex]);
+      const [g, s, f] = picked;
+      
+    }
+
+    // Управление
+    spinBtn.addEventListener('click', spin);
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space'){ e.preventDefault(); spin(); }
+    }, {passive:false});
+
+    // Поддержка клика по каждому барабану — ручной reroll отдельного столбца
+    document.getElementById('reels').addEventListener('click', (e)=>{
+      const parent = e.target.closest('.reel');
+      if(!parent || isSpinning) return;
+      const idx = [...parent.parentElement.children].indexOf(parent);
+      reels[idx].targetIndex = Math.floor(Math.random() * reels[idx].values.length);
+      // Мгновенно показать выбранный элемент в центре
+      const reel = reels[idx];
+      const centerRow = Math.floor((reel.values.length * reelLoopCount)/2);
+      const baseIndex = centerRow - Math.floor(reel.values.length/2);
+      const stopIndex = baseIndex + reel.targetIndex;
+      const offset = -(stopIndex * itemHeight) + itemHeight/2;
+      reel.track.style.transform = `translateY(${offset}px)`;
+      // Обновить вывод, если все три уже стояли
+      if(!isSpinning){
+        const picked = reels.map(r => r.values[r.targetIndex]);
+        const [g,s,f] = picked;
+        resultEl.innerHTML = `<span class="badge">Комбинация: <span class="pill">${g}</span> × <span class="pill">${s}</span> × <span class="pill">${f}</span></span>`;
+      }
+    });
+  </script>
+</body>
+</html>
