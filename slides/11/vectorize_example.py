@@ -4,9 +4,7 @@ model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 text = "Мама мыла раму"
 emb = model.encode(text, normalize_embeddings=True)
 
-print(emb.shape)   # (384,)
 print(emb[:8])     # первые числа векторa
-
 
 # emb.ndim        # число измерений (1 или 2)
 # emb.shape[0]    # длина вектора, или размер батча
